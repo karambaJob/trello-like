@@ -1,0 +1,39 @@
+.board {
+	height: 100vh;
+	background-image: url('https://picsum.photos/id/904/2000/1100');
+	padding: 10px 8px;
+	font-size: 14px;
+	overflow: hidden;
+
+	&__menu {
+		padding: 10px 8px;
+	}
+
+	&__columns {
+		display: flex;
+		overflow: auto;
+		height: 100%;
+	}
+
+	&__column {
+		vertical-align: top;
+		display: inline-block;
+		flex-shrink: 0;
+
+		&_add {
+			background-color: rgba(0,0,0,.08);
+			padding: 6px 10px;
+			height: 32px;
+			box-sizing: border-box;
+			cursor: pointer;
+
+			&:hover {
+				background-color: rgba(0,0,0,.2);
+			}
+		}
+
+		& + & {
+			margin-left: 10px;
+		}
+	}
+}
