@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { block } from 'bem-cn';
 import { connect } from 'react-redux'
 import Editable from '../../ui/editable/Editable';
-import { cardsActions } from '../../../reducers/cards';
+import { addNewCard } from '../../../reducers/cards';
 
 import MiniCard from '../miniCard/MiniCard';
 
@@ -41,26 +41,13 @@ class Column extends PureComponent {
 	}
 }
 
-function getColumnCards(columnId, state) {
-	return state.cards.filter(card => card.columnId === columnId);
-} 
-
-const mapStateToProps = (state, props) => ({
-	cards: getColumnCards(props.id, state)
-});
-
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		addNewCard: () => dispatch({
-			type: cardsActions.add,
-			payload: {
-				columnId: props.id
-			}
-		})
+		addNewCard: () => dispatch(addNewCard(props.id))
 	};
 }
 
 export default connect(
-	mapStateToProps,
+	null,
 	mapDispatchToProps
 )(Column);

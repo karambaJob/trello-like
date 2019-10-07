@@ -3,7 +3,7 @@ import { block } from 'bem-cn';
 import { connect } from 'react-redux'
 
 import Editable from '../../ui/editable/Editable';
-import {cardsActions} from '../../../reducers/cards';
+import { updateCard } from '../../../reducers/cards';
 
 import './style.less';
 const b = block('mini-card');
@@ -17,9 +17,11 @@ class MiniCard extends PureComponent {
 				<h3 className={b('name')}>
 					<Editable value={title} onSave={this.props.changeNameHandler}/>
 				</h3>
-				<p>
-					<Editable value={desc}/>
-				</p>
+				{desc && (
+					<p>
+						<Editable value={desc} onSave={this.props.changeDescHandler}/>
+					</p>
+				)}
 			</div>
 		);
 	}
@@ -27,13 +29,14 @@ class MiniCard extends PureComponent {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		changeNameHandler: (newValue) => dispatch({
-			type: cardsActions.changeName,
-			payload: {
-				name: newValue,
-				id: props.id
-			}
-		})
+		changeNameHandler: (newValue) => dispatch(updateCard(props.id, {
+			name: newValue,
+			desc: props.desc
+		})),
+		changeDescHandler: (newValue) => dispatch(updateCard(props.id, {
+			name: props.name,
+			desc: newValue
+		}))
 	};
 }
 

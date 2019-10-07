@@ -44,7 +44,7 @@ const db = {
 		get: function(id) {
 			return dbData.cards.find(card => card.id === id);
 		},
-		create: function(data, column_id) {
+		create: function(column_id, data) {
 			const newCard = {
 				id: dbData.cards.length + 1,
 				createdAt: new Date(),
@@ -52,13 +52,12 @@ const db = {
 				data
 			};
 
-			db.cards.add(newCard);
+			dbData.cards.push(newCard);
 			return newCard;
 		},
-		update: function(id, data, column_id) {
+		update: function(id, data) {
 			const card = db.cards.get(id);
 			card.data = data;
-			catd.column_id = column_id;
 
 			return card;
 		},
@@ -69,7 +68,11 @@ const db = {
 	},
 	columns: {
 		list: function() {
-			return dbData.columns;
+			const columns = dbData.columns;
+
+			return columns.map(column => {
+				return db.columns.get(column.id);
+			});
 		},
 		get: function(id) {
 			const findedColumn = dbData.columns.find(column => column.id === id);

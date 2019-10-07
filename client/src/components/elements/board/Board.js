@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { block } from 'bem-cn';
 import { connect } from 'react-redux'
-import { columnsActions } from '../../../reducers/columns';
+import { columnsActions, getColumns } from '../../../reducers/columns';
 
 import Column from '../column/Column';
 
@@ -9,6 +9,11 @@ import './style.less';
 const b = block('board');
 
 class Board extends PureComponent {
+	componentDidMount() {
+		const { getColumns } = this.props;
+		getColumns();
+	}
+
 	render() {
 		const { columns, addNewColumn } = this.props;
 
@@ -20,7 +25,7 @@ class Board extends PureComponent {
 				<div className={b('columns')}>
 					{columns.map((column => 
 						<div key={column.id} className={b('column')}>
-							<Column id={column.id} data={column.data}/>
+							<Column id={column.id} data={column.data} cards={column.cards}/>
 						</div>
 					))}
 					<div key="new-column" className={b('column', {add: true})} onClick={addNewColumn}>
@@ -40,7 +45,10 @@ const mapDispatchToProps = dispatch => {
 	return {
 		addNewColumn: () => dispatch({
 			type: columnsActions.add
-		})
+		}),
+		getColumns: () => {
+			dispatch(getColumns())
+		}
 	};
 }
 

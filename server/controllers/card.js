@@ -15,16 +15,15 @@ function getCard(req, res) {
 }
 
 function createCard(req, res) {
-	const {body} = req.res;
-
-	res.send(db.cards.create(body.data, body.columnId));
+	const {body} = req;
+	res.send(db.cards.create(body.columnId, {name: 'Новая карта', desc: 'Новое описание'}));
 }
 
 function updateCard(req, res) {
 	const id = _getCardId(req);
-	const {body} = req.res;
+	const {body} = req;
 
-	res.send(db.cards.update(id, body.data, body.columnId));
+	res.send(db.cards.update(id, body));
 }
 
 function deleteCard(req, res) {

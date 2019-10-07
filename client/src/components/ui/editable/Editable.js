@@ -53,7 +53,6 @@ class Editable extends PureComponent {
 				isEditMode: false
 			});
 			window.removeEventListener('click', this.windowClickHandler);
-			console.log('onSave');
 
 			const {onSave} = this.props;
 			if (onSave) {
