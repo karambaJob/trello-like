@@ -11,7 +11,7 @@ const b = block('column');
 
 class Column extends PureComponent {
 	render() {
-		const {cards, data} = this.props;
+		const {cards = [], data} = this.props;
 
 		return (
 			<div className={b()}>

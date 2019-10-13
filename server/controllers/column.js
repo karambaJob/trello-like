@@ -6,6 +6,11 @@ function getColumnList(req, res) {
 	res.send(columns);
 }
 
+function createColumn(req, res) {
+	res.send(db.columns.create({name: 'Новая колонка'}));
+}
+
 module.exports = {
-	getColumnList
+	getColumnList,
+	createColumn
 };

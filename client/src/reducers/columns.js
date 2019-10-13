@@ -3,7 +3,8 @@ export const columnsActions = {
 	remove: 'COLUMNS/REMOVE',
 	loadSuccess: 'COLUMNS/LOAD_SUCCESS',
 	load: 'COLUMNS/LOAD',
-	loadFailed: 'COLUMNS/LOAD_FAILED'
+	loadFailed: 'COLUMNS/LOAD_FAILED',
+	addFailed: 'COLUMNS/ADD_FAILED'
 }
 
 export function getColumns() {
@@ -20,6 +21,30 @@ export function getColumns() {
 			}).catch(err => {
 				dispatch({
 					type: columnsActions.loadFailed,
+					payload: {
+						data: err
+					}
+				});
+			});
+	}
+}
+
+export function addNewColumn(columnId) {
+	return function(dispatch) {
+		fetch('http://localhost:3000/api/column', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				columnId: columnId
+			})
+		})
+			.then(res => {
+				dispatch(getColumns());
+			}).catch(err => {
+				dispatch({
+					type: columnsActions.addFailed,
 					payload: {
 						data: err
 					}

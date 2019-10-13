@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { block } from 'bem-cn';
 import { connect } from 'react-redux'
-import { columnsActions, getColumns } from '../../../reducers/columns';
+import { getColumns, addNewColumn } from '../../../reducers/columns';
 
 import Column from '../column/Column';
 
@@ -43,9 +43,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addNewColumn: () => dispatch({
-			type: columnsActions.add
-		}),
+		addNewColumn: () => dispatch(addNewColumn()),
 		getColumns: () => {
 			dispatch(getColumns())
 		}

@@ -92,7 +92,7 @@ const db = {
 				data
 			};
 
-			db.columns.add(newColumn);
+			dbData.columns.push(newColumn);
 			return newColumn;
 		},
 		delete: function(id) {
