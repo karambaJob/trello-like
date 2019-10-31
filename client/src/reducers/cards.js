@@ -4,8 +4,9 @@ export const cardsActions = {
 	changeName: 'CARDS/CHANGE_NAME',
 	add: 'CARDS/ADD',
 	addSuccess: 'CARDS/ADD_SUCCESS',
-	addFailed: 'CARDS/ADD_FAILDE',
-	remove: 'CARDS/REMOVE'
+	addFailed: 'CARDS/ADD_FAILED',
+	remove: 'CARDS/REMOVE',
+	updateFailed: 'CARDS/UPDATE_FAILED',
 }
 
 export function updateCard(cardId, data) {
@@ -23,7 +24,7 @@ export function updateCard(cardId, data) {
 			dispatch(getColumns());
 		}).catch(err => {
 			dispatch({
-				type: columnsActions.addFailed,
+				type: columnsActions.updateFailed,
 				payload: {
 					data: err
 				}

@@ -10,6 +10,7 @@ apiRoute.get('/ping', function(req, res) {
 // Columns
 apiRoute.get('/columnList', columnController.getColumnList);
 apiRoute.post('/column', columnController.createColumn);
+apiRoute.put('/column/:id', columnController.updateColumn);
 
 // Cards
 apiRoute.get('/cardList', cardController.getCardList);

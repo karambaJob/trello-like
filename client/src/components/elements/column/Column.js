@@ -3,6 +3,7 @@ import { block } from 'bem-cn';
 import { connect } from 'react-redux'
 import Editable from '../../ui/editable/Editable';
 import { addNewCard } from '../../../reducers/cards';
+import { updateColumn } from '../../../reducers/columns';
 
 import MiniCard from '../miniCard/MiniCard';
 
@@ -16,7 +17,7 @@ class Column extends PureComponent {
 		return (
 			<div className={b()}>
 				<h2 className={b('name')}>
-					<Editable value={data.name}/>
+					<Editable value={data.name} onSave={this.props.changeNameHandler}/>
 				</h2>
 				<ul className={b('list')}>
 					{cards.map((cardData, i) => {
@@ -43,7 +44,10 @@ class Column extends PureComponent {
 
 const mapDispatchToProps = (dispatch, props) => {
 	return {
-		addNewCard: () => dispatch(addNewCard(props.id))
+		addNewCard: () => dispatch(addNewCard(props.id)),
+		changeNameHandler: (newValue) => dispatch(updateColumn(props.id, {
+			name: newValue
+		})),
 	};
 }
 

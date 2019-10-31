@@ -4,7 +4,8 @@ export const columnsActions = {
 	loadSuccess: 'COLUMNS/LOAD_SUCCESS',
 	load: 'COLUMNS/LOAD',
 	loadFailed: 'COLUMNS/LOAD_FAILED',
-	addFailed: 'COLUMNS/ADD_FAILED'
+	addFailed: 'COLUMNS/ADD_FAILED',
+	updateFailed: 'CARDS/UPDATE_FAILED',
 }
 
 export function getColumns() {
@@ -50,6 +51,30 @@ export function addNewColumn(columnId) {
 					}
 				});
 			});
+	}
+}
+
+export function updateColumn(columnId, data) {
+	return function(dispatch) {
+		fetch(`http://localhost:3000/api/column/${columnId}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				...data
+			})
+		})
+		.then(res => {
+			dispatch(getColumns());
+		}).catch(err => {
+			dispatch({
+				type: columnsActions.updateFailed,
+				payload: {
+					data: err
+				}
+			});
+		});
 	}
 }
 

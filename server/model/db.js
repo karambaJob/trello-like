@@ -101,6 +101,15 @@ const db = {
 				db.cards.remove(card.id);
 			});
 			return;
+		},
+		update: function(id, data) {
+			const column = db.columns.get(id);
+			column.data = {
+				...column.data,
+				...data
+			};
+
+			return column;
 		}
 	}
 }
