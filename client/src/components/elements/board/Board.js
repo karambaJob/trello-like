@@ -25,7 +25,7 @@ class Board extends PureComponent {
 				<div className={b('columns')}>
 					{columns.map((column => 
 						<div key={column.id} className={b('column')}>
-							<Column id={column.id} data={column.data} cards={column.cards}/>
+							<Column id={column._id} data={column.data} cards={column.cards}/>
 						</div>
 					))}
 					<div key="new-column" className={b('column', {add: true})} onClick={addNewColumn}>

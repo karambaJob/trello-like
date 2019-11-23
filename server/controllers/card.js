@@ -16,7 +16,9 @@ function getCard(req, res) {
 
 function createCard(req, res) {
 	const {body} = req;
-	res.send(db.cards.create(body.columnId, {name: 'Новая карта', desc: 'Новое описание'}));
+	db.cards.create(body.columnId, {name: 'Новая карта', desc: 'Новое описание'}).then(dbRes => {
+		res.send('Success');
+	})
 }
 
 function updateCard(req, res) {

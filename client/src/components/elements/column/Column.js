@@ -14,6 +14,10 @@ class Column extends PureComponent {
 	render() {
 		const {cards = [], data} = this.props;
 
+		if (!data || !data.name) {
+			return null;
+		}
+
 		return (
 			<div className={b()}>
 				<h2 className={b('name')}>

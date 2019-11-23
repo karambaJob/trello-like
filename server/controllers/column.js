@@ -1,24 +1,31 @@
 const db = require('../model/db');
 
 function _getColumnId(req) {
-	return Number(req.params.id) || null;
+	console.log(req.params);
+	return req.params.id || null;
 }
 
 function getColumnList(req, res) {
-	const columns = db.columns.list();
+	const columnsPromise = db.columns.list();
 
-	res.send(columns);
+	columnsPromise.then(data => {
+		res.send(data);
+	})
 }
 
 function createColumn(req, res) {
-	res.send(db.columns.create({name: 'Новая колонка'}));
+	db.columns.create({name: 'Новая колонка'}).then(dbRes => {
+		res.send();
+	});
 }
 
 function updateColumn(req, res) {
 	const id = _getColumnId(req);
 	const {body} = req;
 
-	res.send(db.columns.update(id, body));
+	db.columns.update(id, body).then(dbRes => {
+		res.send('Success');
+	})
 }
 
 module.exports = {
